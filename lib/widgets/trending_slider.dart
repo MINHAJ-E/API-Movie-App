@@ -17,6 +17,7 @@ final AsyncSnapshot snapshot;
         itemCount: snapshot.data!.length,
         options: CarouselOptions(
           height: 300,
+        
           autoPlay: true,
           viewportFraction: 0.55,
           enlargeCenterPage: true,

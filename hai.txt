@@ -1,0 +1,15 @@
+
+  static const _latest="https://api.themoviedb.org/3/movie/upcoming?api_key=${Constants.apiKey}";
+
+
+  Future<List<Movie>>getLatest()async{
+    final response= await http.get(Uri.parse(_latestUrl));
+    if(response.statusCode==200){
+      final deCodeData = json.decode(response.body)['results'] as List;
+      return deCodeData.map((movie) => Movie.fromJson(movie)).toList();
+    }else{
+      throw Exception("something is misssinfg");
+    }
+
+  }
+

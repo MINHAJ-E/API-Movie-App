@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/controller/search_provider.dart';
 import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/model/model.dart';
@@ -19,7 +20,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    // final searchProvider = Provider.of<SearchProvider>(context);
+    final searchProvider = Provider.of<SearchProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
@@ -37,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   filled: true,
                 ),
                 onChanged: (value) {
-                  // searchProvider.searchMovies(value);
+                  searchProvider.searchMovies(value);
                 },
               ),
             ),
@@ -49,34 +50,34 @@ class _SearchScreenState extends State<SearchScreen> {
           statusBarBrightness: Brightness.dark,
         ),
       ),
-      // body: GridView.builder(
-      //   itemCount: searchProvider.searchedResult.length, // Corrected property name here
-      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      //     mainAxisSpacing: 8,
-      //     crossAxisSpacing: 8,
-      //     crossAxisCount: 3,
-      //     childAspectRatio: 1 / 1.4,
-      //   ),
-      //   itemBuilder: (context, index) {
-      //     final searchData = searchProvider.searchedResult[index]; // Corrected variable name here
-      //     return Container(
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(1.2),
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             image: DecorationImage(
-      //               image: NetworkImage(searchData.posterPath!??'asset/MiniTv.png'),
-      //               fit: BoxFit.fill,
-      //               filterQuality: FilterQuality.high,
-      //             ),
-      //             color: Color.fromARGB(255, 10, 22, 112),
-      //             borderRadius: BorderRadius.circular(19),
-      //           ),
-      //         ),
-      //       ),
-      //     );
-      //   },
-      // ),
+      body: GridView.builder(
+        itemCount: searchProvider.searchedResult.length, // Corrected property name here
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          crossAxisCount: 3,
+          childAspectRatio: 1 / 1.4,
+        ),
+        itemBuilder: (context, index) {
+          final searchData = searchProvider.searchedResult[index]; // Corrected variable name here
+          return Container(
+            child: Padding(
+              padding: const EdgeInsets.all(1.2),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage('${Constants.imagePath}${searchData.posterPath ??''}'),
+                    fit: BoxFit.fill,
+                    filterQuality: FilterQuality.high,
+                  ),
+                  color: Color.fromARGB(255, 10, 22, 112),
+                  borderRadius: BorderRadius.circular(19),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

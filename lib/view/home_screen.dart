@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movie>> trendingMovies;
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> upcomingMovies;
+  // late Future<List<Movie>> latestMovies;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     trendingMovies = ApiServices().getTrendingMovies();
     topRatedMovies = ApiServices().getTopRatedMovies();
     upcomingMovies = ApiServices().getUpcomingMovies();
+    // latestMovies = ApiServices().getLatest();
   }
 
   @override
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
              Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -149,6 +151,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
+                const Text("Latyest Movies", style: TextStyle(fontSize: 17)),
+                const SizedBox(
+                  height: 15,
+                ),
+                // MovieSlider(),
+        
+                // SizedBox(
+                //   child: FutureBuilder<List<Movie>>(
+                //     future: ApiServices().getLatest(),
+                //     builder: (context, snapshot) {
+                //       if (snapshot.hasError) {
+                //         return Center(
+                //           child: Text(snapshot.error.toString()),
+                //         );
+                //       } else if (snapshot.hasData) {
+                //         // final data = snapshot.data;
+                //         return MovieSlider(snapshot: snapshot);
+                //       } else {
+                //         return const Center(
+                //           child: CircularProgressIndicator(),
+                //         );
+                //       }
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),

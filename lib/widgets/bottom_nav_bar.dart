@@ -31,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
               backgroundColor: Colors.black,
               color: Colors.white,
               activeColor: Colors.white,
-              tabBackgroundColor: Color.fromARGB(255, 0, 61, 110),
+              tabBackgroundColor:   Color(0xff5b0070),
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.search, text: 'Search'),
