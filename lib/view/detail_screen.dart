@@ -16,21 +16,21 @@ class DetailesScreen extends StatelessWidget {
         body: CustomScrollView(
       slivers: [
         SliverAppBar.large(
-          leading: BackBtn(),
+          leading: const BackBtn(),
           backgroundColor: Calours.scaffoldbgColor,
           expandedHeight: 500,
           pinned: true,
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
-              movie.title!,
-              style: GoogleFonts.belleza(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            // title: Text(
+            //   movie.title!,
+            //   style: GoogleFonts.belleza(
+            //     fontSize: 20,
+            //     fontWeight: FontWeight.w700,
+            //   ),
+            // ),
             background: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
@@ -44,7 +44,7 @@ class DetailesScreen extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             child: Column(
               children: [
                 Text(
@@ -54,7 +54,7 @@ class DetailesScreen extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Text(
@@ -64,7 +64,7 @@ class DetailesScreen extends StatelessWidget {
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 SizedBox(
@@ -72,7 +72,7 @@ class DetailesScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
@@ -96,25 +96,28 @@ class DetailesScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                         padding: EdgeInsets.all(10),
+                      
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Container(width: 140,
+                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
+                        
                         ),
                         child: Row(
                           children: [
                             Text('Rating ',  style: GoogleFonts.acme(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w300,
-                              ),),Icon(Icons.star,color: Colors.amber,),
+                              ),),const Icon(Icons.star,color: Colors.amber,),
                               Text('${movie.voteAverage!.toStringAsFixed(1)}/10')
                           ],
                         ),
                       )
-                    ],
-                  ),
-                )
               ],
             ),
           ),

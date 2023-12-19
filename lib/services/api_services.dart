@@ -8,6 +8,7 @@ class ApiServices{
   static const _trendingUrl="https://api.themoviedb.org/3/trending/movie/day?api_key=${Constants.apiKey}";
   static const _topRatedUrl="https://api.themoviedb.org/3/movie/top_rated?api_key=${Constants.apiKey}";
   static const _upComingUrl="https://api.themoviedb.org/3/movie/upcoming?api_key=${Constants.apiKey}";
+  // final searchUrl ="https://api.themoviedb.org/3/search/movie?query=$query&api_key=${Constants.apiKey}";
 
   Future<List<Movie>>getTrendingMovies()async{
     final response= await http.get(Uri.parse(_trendingUrl));
@@ -39,4 +40,14 @@ class ApiServices{
     }
 
   }
+//  Future<List<Movie>> searchMovie({required searchurl}) async {
+//     final response= await http.get(Uri.parse(searchurl));
+//     if(response.statusCode==200){
+//       final deCodeData = json.decode(response.body)['results'] as List;
+//       return deCodeData.map((movie) => Movie.fromJson(movie)).toList();
+//     }else{
+//       throw Exception("something is misssinfg");
+//     }
+
+//   }
 }
