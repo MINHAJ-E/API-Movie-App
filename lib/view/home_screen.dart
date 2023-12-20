@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/movie_slider.dart';
@@ -15,17 +16,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Movie>> trendingMovies;
-  late Future<List<Movie>> topRatedMovies;
-  late Future<List<Movie>> upcomingMovies;
+  // late Future<List<Movie>> trendingMovies;
+  // late Future<List<Movie>> topRatedMovies;
+  // late Future<List<Movie>> upcomingMovies;
   // late Future<List<Movie>> latestMovies;
 
   @override
   void initState() {
     super.initState();
-    trendingMovies = ApiServices().getTrendingMovies();
-    topRatedMovies = ApiServices().getTopRatedMovies();
-    upcomingMovies = ApiServices().getUpcomingMovies();
+    // trendingMovies = ApiServices().getMovies(apiUrl: Constants.trending);
+    // topRatedMovies = ApiServices().getTopRatedMovies();
+    // upcomingMovies = ApiServices().getUpcomingMovies();
     // latestMovies = ApiServices().getLatest();
   }
 
@@ -76,13 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text("Trending Movies", style: TextStyle(fontSize: 17)),
+                 Text("Trending Movies", style:GoogleFonts.aBeeZee(
+                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 const SizedBox(height: 15),
                 // TrendingSlider(),
         
                 SizedBox(
                   child: FutureBuilder(
-                    future: trendingMovies,
+                    future:ApiServices().getMovies(apiUrl: Constants.trending),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -103,12 +105,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
         
                 const SizedBox(height: 15),
-                const Text("Top Rated Movies", style: TextStyle(fontSize: 17)),
+                 Text("Top Rated Movies", style:GoogleFonts.aBeeZee(
+                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 // MovieSlider(),
         
                 SizedBox(
                   child: FutureBuilder(
-                    future: topRatedMovies,
+                    future: ApiServices().getMovies(apiUrl: Constants.topRated),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -126,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
         
-                const Text("Upcoming Movies", style: TextStyle(fontSize: 17)),
+                 Text("Upcoming Movies", style:GoogleFonts.aBeeZee(
+                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 const SizedBox(
                   height: 15,
                 ),
@@ -134,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
         
                 SizedBox(
                   child: FutureBuilder(
-                    future: upcomingMovies,
+                    future: ApiServices().getMovies(apiUrl: Constants.upComing),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -151,31 +155,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-                const Text("Latyest Movies", style: TextStyle(fontSize: 17)),
+                 Text("Popular Movies",style:GoogleFonts.aBeeZee(
+                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 const SizedBox(
                   height: 15,
                 ),
-                // MovieSlider(),
+                // MovieSlider(snapshot: null,),
         
-                // SizedBox(
-                //   child: FutureBuilder<List<Movie>>(
-                //     future: ApiServices().getLatest(),
-                //     builder: (context, snapshot) {
-                //       if (snapshot.hasError) {
-                //         return Center(
-                //           child: Text(snapshot.error.toString()),
-                //         );
-                //       } else if (snapshot.hasData) {
-                //         // final data = snapshot.data;
-                //         return MovieSlider(snapshot: snapshot);
-                //       } else {
-                //         return const Center(
-                //           child: CircularProgressIndicator(),
-                //         );
-                //       }
-                //     },
-                //   ),
-                // ),
+                SizedBox(
+                  child: FutureBuilder<List<Movie>>(
+                    future:  ApiServices().getMovies(apiUrl: Constants.popular),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(snapshot.error.toString()),
+                        );
+                      } else if (snapshot.hasData) {
+                        // final data = snapshot.data;
+                        return MovieSlider(snapshot: snapshot);
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
           ),

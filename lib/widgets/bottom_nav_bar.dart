@@ -22,7 +22,7 @@ class _BottomBarState extends State<BottomBar> {
         bottomNavigationBar: Container(
           color: Colors.black,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
             child: GNav(
               gap: 4,
               onTabChange: (index) {
@@ -31,8 +31,8 @@ class _BottomBarState extends State<BottomBar> {
               backgroundColor: Colors.black,
               color: Colors.white,
               activeColor: Colors.white,
-              tabBackgroundColor:   Color(0xff5b0070),
-              tabs: [
+              tabBackgroundColor:   const Color(0xff5b0070),
+              tabs: const [
                 GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.search, text: 'Search'),
                 GButton(icon: Icons.movie_sharp, text: 'Movie'),
@@ -47,8 +47,8 @@ class _BottomBarState extends State<BottomBar> {
 }
 
 final List<Widget> _pages = [
-  HomeScreen(),
-  SearchScreen(),
-  MovieScreen(),
-  TvShowScreen(),
+  const HomeScreen(),
+  const SearchScreen(),
+  const MovieScreen(),
+  const TvShowScreen(),
 ];
