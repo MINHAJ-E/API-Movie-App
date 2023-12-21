@@ -8,18 +8,12 @@ import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/view/detail_screen.dart';
 import 'package:movie_app/widgets/back_btn.dart';
-import 'package:movie_app/widgets/contaner.dart';
-// import 'package:movie_app/widgets/container.dart'; // Corrected typo here
+import 'package:movie_app/widgets/contaner.dart'; // Corrected typo here
 import 'package:provider/provider.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final searchProvider = Provider.of<SearchProvider>(context);
@@ -67,33 +61,44 @@ class _SearchScreenState extends State<SearchScreen> {
           itemBuilder: (context, index) {
             final searchData = searchProvider
                 .searchedResult[index]; // Corrected variable name here
-            return GestureDetector(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(1.2),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            '${Constants.imagePath}${searchData.posterPath ?? ''}'),
-                        fit: BoxFit.fill,
-                        filterQuality: FilterQuality.high,
+
+            final posterPath = searchData.posterPath;
+
+            if (posterPath != null && Constants.imagePath.isNotEmpty) {
+              final imageUrl = '${Constants.imagePath}$posterPath';
+
+              return GestureDetector(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(imageUrl),
+                          fit: BoxFit.fill,
+                          filterQuality: FilterQuality.high,
+                        ),
+                        color: Color.fromARGB(255, 10, 22, 112),
+                        borderRadius: BorderRadius.circular(19),
                       ),
-                      color: Color.fromARGB(255, 10, 22, 112),
-                      borderRadius: BorderRadius.circular(19),
                     ),
                   ),
                 ),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailesScreen(
-                    id: searchData.id!,
-                    movie: searchData,
-                  ),
-                ));
-              },
-            );
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DetailesScreen(
+                      id: searchData.id!,
+                      movie: searchData,
+                    ),
+                  ));
+                },
+              );
+            } else {
+              // Handle the case where posterPath is null or Constants.imagePath is empty
+              return Container(
+                child: Text("No Data"),
+              );
+            }
           },
         ),
       ]),

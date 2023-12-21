@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/controller/search_provider.dart';
 import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/controller/bottom_bar_provider.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => BottomBarProvider(),),
         ChangeNotifierProvider(create: (context) => SearchProvider(),),
+        ChangeNotifierProvider(create: (context) => HomeProvider(),),
       
       ],
       child: MaterialApp(

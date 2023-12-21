@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/constants/constance.dart';
+import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/model/cast_model.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/back_btn.dart';
+import 'package:provider/provider.dart';
 
 class DetailesScreen extends StatelessWidget {
   DetailesScreen({
     super.key,
     required this.movie,
     required this.id,
-    //  required this.id
   });
 
   final Movie movie;
   int id;
-  // int? id;
 
   @override
   Widget build(BuildContext context) {
+    // final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -135,59 +136,56 @@ class DetailesScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-               FutureBuilder(
-  future: ApiServices().getCast(
-    castUrl:  'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa',
-
-  ),
-  builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-      return CircularProgressIndicator();
-    } else if (snapshot.hasError) {
-      return Text("Error: ${snapshot.error}");
-    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-      return Text("No data available");
-    } else {
-      return SizedBox(
-        height: 130,
-        width: double.infinity,
-        child: ListView.builder(
-          itemCount: snapshot.data!.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            CastModel casts = snapshot.data![index];
-            return Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child:
-                         CircleAvatar(
-                          radius: 45,
-                          backgroundImage: NetworkImage(
-                           '${Constants.imagePath}${casts.profilePath!}'
-
-                          ),
-                        ),
-                      ),
-                    ),
+                FutureBuilder(
+                  future: ApiServices().getCast(
+                    castUrl:
+                        'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa',
                   ),
-                  Text(casts.name!),
-                  // Add any additional widgets related to CastModel here
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    }
-  },
-)
+                  builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text("Error: ${snapshot.error}");
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Text("No data available");
+                    } else {
+                      return SizedBox(
+                        height: 130,
+                        width: double.infinity,
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            CastModel casts = snapshot.data![index];
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 12),
+                                    child: Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: CircleAvatar(
+                                          radius: 45,
+                                          backgroundImage: NetworkImage(
+                                              '${Constants.imagePath}${casts.profilePath!}'),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(casts.name!),
+                                  // Add any additional widgets related to CastModel here
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                )
               ],
             ),
           ),

@@ -3,35 +3,19 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/constance.dart';
+import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/movie_slider.dart';
 import 'package:movie_app/widgets/trending_slider.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  // late Future<List<Movie>> trendingMovies;
-  // late Future<List<Movie>> topRatedMovies;
-  // late Future<List<Movie>> upcomingMovies;
-  // late Future<List<Movie>> latestMovies;
-
-  @override
-  void initState() {
-    super.initState();
-    // trendingMovies = ApiServices().getMovies(apiUrl: Constants.trending);
-    // topRatedMovies = ApiServices().getTopRatedMovies();
-    // upcomingMovies = ApiServices().getUpcomingMovies();
-    // latestMovies = ApiServices().getLatest();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -42,23 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
               fontSize: 30, fontWeight: FontWeight.w800, color: Colors.red),
         ), // Add a title to the app bar
       ),
-      body: Stack(
-        children: [
-             Container(
+      body: Stack(children: [
+        Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-          Color(0xff1f005c),
-              Color(0xff5b0060),
-              Colors.black
-              // Color(0xff870160),
-              // Color(0xffac255e),
-              // Color(0xffca485c),
-              // Color(0xffe16b5c),
-              // Color(0xfff39060),
-              // Color(0xffffb56b),
+                Color(0xff1f005c),
+                Color(0xff5b0060),
+                Colors.black
+                // Color(0xff870160),
+                // Color(0xffac255e),
+                // Color(0xffca485c),
+                // Color(0xffe16b5c),
+                // Color(0xfff39060),
+                // Color(0xffffb56b),
               ],
             ),
           ),
@@ -68,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: const BoxDecoration(color: Colors.transparent),
             ),
           ),
-          
         ),
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -77,14 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                 Text("Trending Movies", style:GoogleFonts.aBeeZee(
-                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+                Text("Trending Movies",
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white)),
                 const SizedBox(height: 15),
                 // TrendingSlider(),
-        
+
                 SizedBox(
                   child: FutureBuilder(
-                    future:ApiServices().getMovies(apiUrl: Constants.trending),
+                    
+                    future:provider .getHomeDAta(url: Constants.trending),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -103,15 +89,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-        
+
                 const SizedBox(height: 15),
-                 Text("Top Rated Movies", style:GoogleFonts.aBeeZee(
-                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+                Text("Top Rated Movies",
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white)),
                 // MovieSlider(),
-        
+
                 SizedBox(
                   child: FutureBuilder(
-                    future: ApiServices().getMovies(apiUrl: Constants.topRated),
+                    future:provider .getHomeDAta(url: Constants.topRated),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -128,17 +117,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-        
-                 Text("Upcoming Movies", style:GoogleFonts.aBeeZee(
-                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+
+                Text("Upcoming Movies",
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white)),
                 const SizedBox(
                   height: 15,
                 ),
                 // MovieSlider(),
-        
+
                 SizedBox(
                   child: FutureBuilder(
-                    future: ApiServices().getMovies(apiUrl: Constants.upComing),
+                    future: provider .getHomeDAta(url: Constants.upComing),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -155,16 +147,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-                 Text("Popular Movies",style:GoogleFonts.aBeeZee(
-                fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+                Text("Popular Movies",
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white)),
                 const SizedBox(
                   height: 15,
                 ),
                 // MovieSlider(snapshot: null,),
-        
+
                 SizedBox(
-                  child: FutureBuilder<List<Movie>>(
-                    future:  ApiServices().getMovies(apiUrl: Constants.popular),
+                  child: FutureBuilder(
+                    future: provider.getHomeDAta(url: Constants.popular),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -185,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-    ]  ),
+      ]),
     );
   }
 }

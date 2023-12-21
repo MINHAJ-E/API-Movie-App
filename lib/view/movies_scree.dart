@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/constance.dart';
+import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/contaner.dart';
 import 'package:movie_app/widgets/movielist_builder.dart';
+import 'package:provider/provider.dart';
 
 
-class MovieScreen extends StatefulWidget {
+class MovieScreen extends StatelessWidget {
   MovieScreen({super.key});
 
   @override
-  State<MovieScreen> createState() => _MovieScreenState();
-}
-
-class _MovieScreenState extends State<MovieScreen> {
-  @override
   Widget build(BuildContext context) {
+        final provider = Provider.of<HomeProvider>(context);
+
    ApiServices service = ApiServices();
     return Scaffold(
       backgroundColor: Colors.black,
@@ -43,7 +42,7 @@ class _MovieScreenState extends State<MovieScreen> {
             // CardHeadings(heading: "Trending", left: 20, top: 20),
             Expanded(
               child: FutureBuilder(
-                  future: ApiServices().getMovies(apiUrl: Constants.popular),
+                  future: provider .getHomeDAta(url: Constants.popular),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("${snapshot.error.toString()}");

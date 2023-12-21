@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/constance.dart';
+import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/contaner.dart';
 import 'package:movie_app/widgets/movie_slider.dart';
+import 'package:provider/provider.dart';
 
 class TvShowScreen extends StatelessWidget {
   const TvShowScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+     final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
         backgroundColor: Colors.black,
         // extendBodyBehindAppBar: true,
@@ -42,7 +45,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future: ApiServices().getMovies(apiUrl: Constants.tvPopular),
+                            future:provider .getHomeDAta(url: Constants.tvPopular),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -63,7 +66,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future: ApiServices().getMovies(apiUrl: Constants.tvTopRated),
+                            future: provider .getHomeDAta(url: Constants.tvTopRated),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -84,7 +87,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future: ApiServices().getMovies(apiUrl: Constants.tvOntheAir),
+                            future:provider .getHomeDAta(url: Constants.tvOntheAir),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
