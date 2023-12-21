@@ -32,11 +32,9 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
-                
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    
                   ),
                   fillColor: Colors.transparent,
                   filled: true,
@@ -55,11 +53,11 @@ class _SearchScreenState extends State<SearchScreen> {
           statusBarBrightness: Brightness.dark,
         ),
       ),
-      body: Stack(
-        children: [
-            AllContainer(),
-       GridView.builder(
-          itemCount: searchProvider.searchedResult.length, // Corrected property name here
+      body: Stack(children: [
+        AllContainer(),
+        GridView.builder(
+          itemCount: searchProvider
+              .searchedResult.length, // Corrected property name here
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
@@ -67,7 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
             childAspectRatio: 1 / 1.4,
           ),
           itemBuilder: (context, index) {
-            final searchData = searchProvider.searchedResult[index]; // Corrected variable name here
+            final searchData = searchProvider
+                .searchedResult[index]; // Corrected variable name here
             return GestureDetector(
               child: Container(
                 child: Padding(
@@ -75,7 +74,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage('${Constants.imagePath}${searchData.posterPath ??''}'),
+                        image: NetworkImage(
+                            '${Constants.imagePath}${searchData.posterPath ?? ''}'),
                         fit: BoxFit.fill,
                         filterQuality: FilterQuality.high,
                       ),
@@ -85,13 +85,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ),
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailesScreen(movie:searchData),));
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailesScreen(
+                    id: searchData.id!,
+                    movie: searchData,
+                  ),
+                ));
               },
             );
           },
         ),
-    ]  ),
+      ]),
     );
   }
 }

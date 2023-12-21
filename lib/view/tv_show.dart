@@ -37,8 +37,10 @@ class TvShowScreen extends StatelessWidget {
                   // MovieSlider(),
                       child: Column(
                         children: [
+                          SizedBox(height: 10,),
                             Text("Popular TV Shows", style:GoogleFonts.aBeeZee(
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),),
+                SizedBox(height: 10,),
                           FutureBuilder(
                             future: ApiServices().getMovies(apiUrl: Constants.tvPopular),
                             builder: (context, snapshot) {
@@ -56,8 +58,10 @@ class TvShowScreen extends StatelessWidget {
                               }
                             },
                           ),
+                          SizedBox(height: 10,),
                             Text("Top Rated TV Shows",style:GoogleFonts.aBeeZee(
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+                SizedBox(height: 10,),
                           FutureBuilder(
                             future: ApiServices().getMovies(apiUrl: Constants.tvTopRated),
                             builder: (context, snapshot) {
@@ -75,8 +79,10 @@ class TvShowScreen extends StatelessWidget {
                               }
                             },
                           ),
+                          SizedBox(height: 10,),
                             Text("On the Air TV show",style:GoogleFonts.aBeeZee(
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
+                SizedBox(height: 10,),
                           FutureBuilder(
                             future: ApiServices().getMovies(apiUrl: Constants.tvOntheAir),
                             builder: (context, snapshot) {
@@ -94,6 +100,7 @@ class TvShowScreen extends StatelessWidget {
                               }
                             },
                           ),
+                          SizedBox(height: 10,),
                         ],
                       ),
                     ),

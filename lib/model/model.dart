@@ -9,6 +9,7 @@ class Movie {
   String? posterPath;
   String? releaseDate;
   double? voteAverage;
+  // double? movieLanguage;
   int? id;
 
   Movie({
@@ -20,6 +21,7 @@ class Movie {
     required this.releaseDate,
     required this.voteAverage,
     required this.id,
+    // required this.movieLanguage,
     
     });
 
@@ -32,7 +34,9 @@ class Movie {
         overview: json["overview"]??'No Data', 
         posterPath: json["poster_path"]??'No Data', 
         releaseDate: json["release_date"]??'No Data', 
+        // movieLanguage:  json['original_language']?? 'no data',
         voteAverage: json["vote_average"].toDouble()??'No Data',
+        
         );
     }
 

@@ -29,7 +29,9 @@ final AsyncSnapshot snapshot;
           return GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => DetailesScreen(movie: snapshot.data[itemIndex]),));
+                builder: (context) => DetailesScreen(
+                  id: snapshot.data[itemIndex].id,
+                  movie: snapshot.data[itemIndex]),));
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),

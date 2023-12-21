@@ -49,6 +49,6 @@ class _BottomBarState extends State<BottomBar> {
 final List<Widget> _pages = [
   const HomeScreen(),
   const SearchScreen(),
-  const MovieScreen(),
+   MovieScreen(),
   const TvShowScreen(),
 ];
