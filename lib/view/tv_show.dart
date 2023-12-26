@@ -45,7 +45,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future:provider .getHomeDAta(url: Constants.tvPopular),
+                            future:provider .getHomeDAta(url: Constants.tvPopular, context: context),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -66,7 +66,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future: provider .getHomeDAta(url: Constants.tvTopRated),
+                            future: provider .getHomeDAta(url: Constants.tvTopRated, context: context),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -87,7 +87,7 @@ class TvShowScreen extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white)),
                 SizedBox(height: 10,),
                           FutureBuilder(
-                            future:provider .getHomeDAta(url: Constants.tvOntheAir),
+                            future:provider .getHomeDAta(url: Constants.tvOntheAir, context: context),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(

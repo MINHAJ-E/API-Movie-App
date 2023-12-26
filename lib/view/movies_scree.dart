@@ -17,7 +17,6 @@ class MovieScreen extends StatelessWidget {
   Widget build(BuildContext context) {
         final provider = Provider.of<HomeProvider>(context);
 
-   ApiServices service = ApiServices();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -42,14 +41,14 @@ class MovieScreen extends StatelessWidget {
             // CardHeadings(heading: "Trending", left: 20, top: 20),
             Expanded(
               child: FutureBuilder(
-                  future: provider .getHomeDAta(url: Constants.popular),
+                  future: provider .getHomeDAta(url: Constants.popular, context: context),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Text("${snapshot.error.toString()}");
+                      return Text(snapshot.error.toString());
                     } else if (snapshot.hasData) {
                       return ListItem(snapshot: snapshot);
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }

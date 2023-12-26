@@ -12,4 +12,7 @@
     }
 
   }
+Center(
+                             child:Lottie.asset("asset/lottie json.json",fit: BoxFit.fill,) 
+                          );
 

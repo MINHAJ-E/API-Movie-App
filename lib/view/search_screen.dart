@@ -19,7 +19,7 @@ class SearchScreen extends StatelessWidget {
     final searchProvider = Provider.of<SearchProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
           Expanded(
@@ -50,8 +50,7 @@ class SearchScreen extends StatelessWidget {
       body: Stack(children: [
         AllContainer(),
         GridView.builder(
-          itemCount: searchProvider
-              .searchedResult.length, // Corrected property name here
+          itemCount: searchProvider.searchedResult.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
@@ -59,8 +58,7 @@ class SearchScreen extends StatelessWidget {
             childAspectRatio: 1 / 1.4,
           ),
           itemBuilder: (context, index) {
-            final searchData = searchProvider
-                .searchedResult[index]; // Corrected variable name here
+            final searchData = searchProvider.searchedResult[index];
 
             final posterPath = searchData.posterPath;
 
@@ -95,9 +93,7 @@ class SearchScreen extends StatelessWidget {
               );
             } else {
               // Handle the case where posterPath is null or Constants.imagePath is empty
-              return Container(
-                child: Text("No Data"),
-              );
+              return const Text("No Data");
             }
           },
         ),

@@ -20,7 +20,7 @@ class _BottomBarState extends State<BottomBar> {
       builder: (context, value, child) => Scaffold(
         body: _pages[value.selectedindex],
         bottomNavigationBar: Container(
-          color: Colors.black,
+          color: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
             child: GNav(
@@ -28,7 +28,7 @@ class _BottomBarState extends State<BottomBar> {
               onTabChange: (index) {
                 context.read<BottomBarProvider>().pageNavigator(index);
               },
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.transparent,
               color: Colors.white,
               activeColor: Colors.white,
               tabBackgroundColor:   const Color(0xff5b0070),

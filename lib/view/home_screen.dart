@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/controller/home_provider.dart';
-import 'package:movie_app/model/model.dart';
-import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/movie_slider.dart';
 import 'package:movie_app/widgets/trending_slider.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,9 +20,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          "NETFLIX",
+          "MOVIEMINGLE",
           style: GoogleFonts.abrilFatface(
-              fontSize: 30, fontWeight: FontWeight.w800, color: Colors.red),
+              fontSize: 30, fontWeight: FontWeight.w800, color: Colors.white),
         ), // Add a title to the app bar
       ),
       body: Stack(children: [
@@ -69,19 +68,35 @@ class HomeScreen extends StatelessWidget {
 
                 SizedBox(
                   child: FutureBuilder(
-                    
-                    future:provider .getHomeDAta(url: Constants.trending),
+                    future: provider.getHomeDAta(
+                        url: Constants.trending, context: context),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
                           child: Text(snapshot.error.toString()),
                         );
-                      } else if (snapshot.hasData) {
-                        // final data = snapshot.data;
+                      } else if (snapshot.hasData &&
+                          snapshot.data != null &&
+                          (snapshot.data as List).isNotEmpty) {
                         return TrendingSlider(
                           snapshot: snapshot,
                         );
-                      } else {
+                      } else if (snapshot.hasData) {
+                        // final data = snapshot.data;
+                        return MovieSlider(snapshot: snapshot);
+                      }
+                      // else if (snapshot.connectionState ==
+                      //     ConnectionState.none) {
+                      //   return Center(
+                      //       child:
+                      //       // Image.asset("asset/MiniTv.png"),
+                      //       Lottie.asset(
+                      //     "asset/lottie json.json",
+                      //     fit: BoxFit.fill,
+                      //   )
+                      //   );
+                      // }
+                      else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -100,7 +115,8 @@ class HomeScreen extends StatelessWidget {
 
                 SizedBox(
                   child: FutureBuilder(
-                    future:provider .getHomeDAta(url: Constants.topRated),
+                    future: provider.getHomeDAta(
+                        url: Constants.topRated, context: context),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -109,7 +125,16 @@ class HomeScreen extends StatelessWidget {
                       } else if (snapshot.hasData) {
                         // final data = snapshot.data;
                         return MovieSlider(snapshot: snapshot);
-                      } else {
+                      } 
+                      // else if (snapshot.connectionState ==
+                      //     ConnectionState.none) {
+                      //   return Center(
+                      //       child: Lottie.asset(
+                      //     "asset/lottie json.json",
+                      //     fit: BoxFit.fill,
+                      //   ));
+                      // }
+                       else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -130,7 +155,8 @@ class HomeScreen extends StatelessWidget {
 
                 SizedBox(
                   child: FutureBuilder(
-                    future: provider .getHomeDAta(url: Constants.upComing),
+                    future: provider.getHomeDAta(
+                        url: Constants.upComing, context: context),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -139,7 +165,16 @@ class HomeScreen extends StatelessWidget {
                       } else if (snapshot.hasData) {
                         // final data = snapshot.data;
                         return MovieSlider(snapshot: snapshot);
-                      } else {
+                      }
+                      //  else if (snapshot.connectionState ==
+                      //     ConnectionState.none) {
+                      //   return Center(
+                      //       child: Lottie.asset(
+                      //     "asset/lottie json.json",
+                      //     fit: BoxFit.fill,
+                      //   ));
+                      // }
+                       else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -159,7 +194,8 @@ class HomeScreen extends StatelessWidget {
 
                 SizedBox(
                   child: FutureBuilder(
-                    future: provider.getHomeDAta(url: Constants.popular),
+                    future: provider.getHomeDAta(
+                        url: Constants.popular, context: context),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(

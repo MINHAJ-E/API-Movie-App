@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/constants/constance.dart';
-import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/model/cast_model.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/back_btn.dart';
-import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class DetailesScreen extends StatelessWidget {
   DetailesScreen({
     super.key,
@@ -139,7 +138,7 @@ class DetailesScreen extends StatelessWidget {
                 FutureBuilder(
                   future: ApiServices().getCast(
                     castUrl:
-                        'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa',
+                        'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa', context: context,
                   ),
                   builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
