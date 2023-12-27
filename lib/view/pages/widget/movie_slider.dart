@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie_app/constants/constance.dart';
-import 'package:movie_app/view/detail_screen.dart';
+import 'package:movie_app/view/detailspage/detail_screen.dart';
 
 class MovieSlider extends StatelessWidget {
   const MovieSlider({

@@ -1,14 +1,10 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/controller/search_provider.dart';
-import 'package:movie_app/helpers/colors.dart';
-import 'package:movie_app/model/model.dart';
-import 'package:movie_app/view/detail_screen.dart';
-import 'package:movie_app/widgets/back_btn.dart';
-import 'package:movie_app/widgets/contaner.dart'; // Corrected typo here
+import 'package:movie_app/view/detailspage/detail_screen.dart';
+import 'package:movie_app/widgets/contaner.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -18,13 +14,14 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchProvider = Provider.of<SearchProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.black,
-      // extendBodyBehindAppBar: true,
+      // backgroundColor: Colors.black,
+      // extendBodyBehindAppBar: true,    
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -48,7 +45,7 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
       body: Stack(children: [
-        AllContainer(),
+        const AllContainer(),
         GridView.builder(
           itemCount: searchProvider.searchedResult.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,19 +63,17 @@ class SearchScreen extends StatelessWidget {
               final imageUrl = '${Constants.imagePath}$posterPath';
 
               return GestureDetector(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(1.2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(imageUrl),
-                          fit: BoxFit.fill,
-                          filterQuality: FilterQuality.high,
-                        ),
-                        color: Color.fromARGB(255, 10, 22, 112),
-                        borderRadius: BorderRadius.circular(19),
+                child: Padding(
+                  padding: const EdgeInsets.all(1.2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                        fit: BoxFit.fill,
+                        filterQuality: FilterQuality.high,
                       ),
+                      color: const Color.fromARGB(255, 10, 22, 112),
+                      borderRadius: BorderRadius.circular(19),
                     ),
                   ),
                 ),
@@ -92,7 +87,6 @@ class SearchScreen extends StatelessWidget {
                 },
               );
             } else {
-              // Handle the case where posterPath is null or Constants.imagePath is empty
               return const Text("No Data");
             }
           },

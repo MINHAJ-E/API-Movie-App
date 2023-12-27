@@ -3,22 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/controller/home_provider.dart';
-import 'package:movie_app/model/model.dart';
-import 'package:movie_app/services/api_services.dart';
 import 'package:movie_app/widgets/contaner.dart';
-import 'package:movie_app/widgets/movielist_builder.dart';
+import 'package:movie_app/view/pages/widget/movielist_builder.dart';
 import 'package:provider/provider.dart';
 
 
 class MovieScreen extends StatelessWidget {
-  MovieScreen({super.key});
+  const MovieScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
         final provider = Provider.of<HomeProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
       appBar: AppBar(
           title: Text(
             "MOVIES",
@@ -34,7 +32,7 @@ class MovieScreen extends StatelessWidget {
         ),
       body: Stack(
         children: [
-          AllContainer(),
+          const AllContainer(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

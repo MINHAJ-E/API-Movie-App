@@ -5,7 +5,7 @@ import 'package:movie_app/model/cast_model.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/services/api_services.dart';
-import 'package:movie_app/widgets/back_btn.dart';
+import 'package:movie_app/view/detailspage/widget/back_btn.dart';
 
 // ignore: must_be_immutable
 class DetailesScreen extends StatelessWidget {
@@ -20,7 +20,6 @@ class DetailesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -31,13 +30,6 @@ class DetailesScreen extends StatelessWidget {
           pinned: true,
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
-            // title: Text(
-            //   movie.title!,
-            //   style: GoogleFonts.belleza(
-            //     fontSize: 20,
-            //     fontWeight: FontWeight.w700,
-            //   ),
-            // ),
             background: ClipRRect(
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(25),
@@ -108,7 +100,7 @@ class DetailesScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -142,11 +134,11 @@ class DetailesScreen extends StatelessWidget {
                   ),
                   builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
                       return Text("Error: ${snapshot.error}");
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Text("No data available");
+                      return const Text("No data available");
                     } else {
                       return SizedBox(
                         height: 130,
@@ -163,19 +155,17 @@ class DetailesScreen extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 12),
-                                    child: Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: CircleAvatar(
-                                          radius: 45,
-                                          backgroundImage: NetworkImage(
-                                              '${Constants.imagePath}${casts.profilePath!}'),
-                                        ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: CircleAvatar(
+                                        radius: 45,
+                                        backgroundImage: NetworkImage(
+                                            '${Constants.imagePath}${casts.profilePath!}'),
                                       ),
                                     ),
                                   ),
                                   Text(casts.name!),
-                                  // Add any additional widgets related to CastModel here
+                                
                                 ],
                               ),
                             );

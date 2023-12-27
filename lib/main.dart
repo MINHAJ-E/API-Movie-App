@@ -3,9 +3,7 @@ import 'package:movie_app/controller/home_provider.dart';
 import 'package:movie_app/controller/search_provider.dart';
 import 'package:movie_app/helpers/colors.dart';
 import 'package:movie_app/controller/bottom_bar_provider.dart';
-import 'package:movie_app/view/home_screen.dart';
-import 'package:movie_app/view/splash_screen.dart';
-import 'package:movie_app/widgets/bottom_nav_bar.dart';
+import 'package:movie_app/view/splashpage/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: Calours.scaffoldbgColor
         ),
-        home:const BottomBar(),
+        home:const SplashScreen(),
       ),
     );
   }

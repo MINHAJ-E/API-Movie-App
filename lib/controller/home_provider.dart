@@ -1,7 +1,6 @@
 // import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/services/api_services.dart';
 
@@ -15,8 +14,10 @@ class HomeProvider extends ChangeNotifier{
       notifyListeners();
       return movies;
     } catch (error) {
-      // print('Error fetching movies: $error');
-      notifyListeners();
+      // print('errorrr fetching movies: $error');
+  
+      Exception(error);
+          notifyListeners();
     }
     notifyListeners();
   }

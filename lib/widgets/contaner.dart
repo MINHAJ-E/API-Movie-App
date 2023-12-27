@@ -13,13 +13,13 @@ class AllContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
           Color(0xff1f005c),
-              Color(0xff5b0060),
+              // Color(0xff5b0060),
               // Color(0xff870160),
               Colors.black
               // Color(0xffac255e),

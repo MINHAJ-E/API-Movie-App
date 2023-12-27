@@ -3,13 +3,12 @@ import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/model/model.dart';
 import 'package:movie_app/services/api_services.dart';
 
-class SearchProvider extends ChangeNotifier{
-    TextEditingController searchController = TextEditingController();
+class SearchProvider extends ChangeNotifier {
+  TextEditingController searchController = TextEditingController();
   List<Movie> searchedResult = [];
-  final ApiServices apiServices =ApiServices();
+  final ApiServices apiServices = ApiServices();
 
-   void searchMovies(String query) async {
-    // String query = queryController.text.trim();
+  void searchMovies(String query) async {
     if (query.isNotEmpty) {
       try {
         final searchUrl =
@@ -20,7 +19,9 @@ class SearchProvider extends ChangeNotifier{
         searchedResult = movies;
         notifyListeners();
       } catch (e) {
-        print("Error: $e");
+        // print("Error: $e");
+        Exception(e);
+        notifyListeners();
       }
     } else {
       searchedResult = [];
@@ -28,4 +29,3 @@ class SearchProvider extends ChangeNotifier{
     }
   }
 }
-
