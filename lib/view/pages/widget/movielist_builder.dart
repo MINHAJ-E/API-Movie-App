@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app/constants/constance.dart';
 import 'package:movie_app/model/model.dart';
+import 'package:movie_app/view/detailspage/detail_screen.dart';
 
 // ignore: must_be_immutable
 class ListItem extends StatelessWidget {
@@ -14,7 +15,6 @@ class ListItem extends StatelessWidget {
         itemCount: snapshot.data!.length,
         itemBuilder: (context, index) {
           Movie data = snapshot.data[index];
-
           return Row(
             children: [
               Padding(
@@ -22,7 +22,12 @@ class ListItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                builder: (context) => DetailesScreen(
+                  id: snapshot.data[index].id,
+                  movie: snapshot.data[index]),));
+                    },
                     child: Container(
                       height: 100,
                       width: 100,

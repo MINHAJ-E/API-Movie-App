@@ -37,8 +37,7 @@ final AsyncSnapshot snapshot;
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
                 height: 300,
-                width: 180,
-             
+                width: 180,             
                 child:Image.network(
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,

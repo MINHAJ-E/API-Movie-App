@@ -6,6 +6,7 @@ import 'package:movie_app/view/pages/widget/movie_slider.dart';
 import 'package:movie_app/view/pages/widget/trending_slider.dart';
 import 'package:movie_app/widgets/contaner.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,17 +17,17 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
           "MOVIEMINGLE",
           style: GoogleFonts.abrilFatface(
               fontSize: 30, fontWeight: FontWeight.w800, color: Colors.white),
-        ), // Add a title to the app bar
+        ),
       ),
       body: Stack(children: [
         const AllContainer(),
-     
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -40,7 +41,6 @@ class HomeScreen extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                         color: Colors.white)),
                 const SizedBox(height: 15),
-
                 SizedBox(
                   child: FutureBuilder(
                     future: provider.getHomeDAta(
@@ -50,13 +50,16 @@ class HomeScreen extends StatelessWidget {
                         return Center(
                           child: Text(snapshot.error.toString()),
                         );
-                      }
-                       else if (snapshot.hasData) {
-                         return TrendingSlider(
+                      } else if (snapshot.hasData) {
+                        return TrendingSlider(
                           snapshot: snapshot,
                         );
-                      }
-                      else {
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.none) {
+                        return Center(
+                          child: Lottie.asset("assets/lottie_json.json"),
+                        );
+                      } else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -64,14 +67,12 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-
                 const SizedBox(height: 15),
                 Text("Top Rated Movies",
                     style: GoogleFonts.aBeeZee(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
                         color: Colors.white)),
-
                 SizedBox(
                   child: FutureBuilder(
                     future: provider.getHomeDAta(
@@ -83,8 +84,12 @@ class HomeScreen extends StatelessWidget {
                         );
                       } else if (snapshot.hasData) {
                         return MovieSlider(snapshot: snapshot);
-                      } 
-                       else {
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.none) {
+                        return Center(
+                          child: Lottie.asset("assets/lottie_json.json"),
+                        );
+                      } else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -92,7 +97,6 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-
                 Text("Upcoming Movies",
                     style: GoogleFonts.aBeeZee(
                         fontSize: 20,
@@ -101,7 +105,6 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-
                 SizedBox(
                   child: FutureBuilder(
                     future: provider.getHomeDAta(
@@ -111,10 +114,14 @@ class HomeScreen extends StatelessWidget {
                         return Center(
                           child: Text(snapshot.error.toString()),
                         );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.none) {
+                        return Center(
+                          child: Lottie.asset("assets/lottie_json.json"),
+                        );
                       } else if (snapshot.hasData) {
                         return MovieSlider(snapshot: snapshot);
-                      }
-                       else {
+                      } else {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -130,7 +137,6 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-
                 SizedBox(
                   child: FutureBuilder(
                     future: provider.getHomeDAta(

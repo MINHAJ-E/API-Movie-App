@@ -17,6 +17,7 @@ class TvShowScreen extends StatelessWidget {
         // backgroundColor: Colors.black,
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
+          automaticallyImplyLeading: false,         
           title: Text(
             "TV SHOW",
             style: GoogleFonts.aBeeZee(
