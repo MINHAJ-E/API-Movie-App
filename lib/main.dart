@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BottomBarProvider(),),
         ChangeNotifierProvider(create: (context) => SearchProvider(),),
         ChangeNotifierProvider(create: (context) => HomeProvider(),),
-        ChangeNotifierProvider(create: (context) => CastProvider(),),
+        // ChangeNotifierProvider(create: (context) => CastProvider(),),
       
       ],
       child: MaterialApp(

@@ -130,11 +130,11 @@ class DetailesScreen extends StatelessWidget {
                   ),
                 ),
                 FutureBuilder(
-                  future:Provider.of<CastProvider>(context,listen: false).loadCast(context, id),
-                // future:   ApiServices().getCast(
-                //     castUrl:
-                //         'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa', context: context,
-                //   ),
+                  // future:Provider.of<CastProvider>(context,listen: false).loadCast(context, id),
+                future:   ApiServices().getCast(
+                    castUrl:
+                        'https://api.themoviedb.org/3/movie/$id/credits?api_key=b3e0d3eff8d8a525377abdb307695baa', context: context,
+                  ),
                   builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();

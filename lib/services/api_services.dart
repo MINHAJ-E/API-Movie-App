@@ -52,8 +52,7 @@ class ApiServices {
     }
   }
 
-  Future<List<CastModel>> getCast(
-      {required castUrl, required BuildContext context}) async {
+  Future<List<CastModel>> getCast({required castUrl, required BuildContext context}) async {
     try {
       final response = await dio.get(castUrl);
       if (response.statusCode == 200) {
